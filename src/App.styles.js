@@ -3,19 +3,18 @@ import { StyleSheet, Dimensions } from 'react-native';
 /**
  * Fetch Device width.
  */
-const width = Dimensions.get('window').width;
+const { width, height } = Dimensions.get('window');
 
 export default styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
-        height: undefined,
-        width: undefined
+        height: height,
+        width: width,
     },
     inputView: {
-        height: 180,
+        height: 190,
         marginHorizontal: 30,
         padding: 10,
         borderWidth: 1,
@@ -36,7 +35,7 @@ export default styles = StyleSheet.create({
         width: width - 30,
         flexDirection: 'row',
         borderWidth: 1,
-        borderRadius: 2,
+        borderRadius: 10,
         borderColor: '#ddd',
         borderBottomWidth: 0,
         shadowColor: '#000',
@@ -90,21 +89,20 @@ export default styles = StyleSheet.create({
     },
     countryNameView: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 10
     },
     text: {
         color: "gray"
     },
     touchFlag: {
         height: 40,
-        width: width - 100
+        width: width - 40
     },
     numberView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingTop: 10,
         paddingHorizontal: 10
     },
     textInput: {

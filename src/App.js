@@ -11,8 +11,8 @@ import styles from './App.styles';
 /**
  * Import Images here.
  */
-import truecaller from './truecaller.png';
-import background from './background.png';
+import truecaller from './assests/truecaller.png';
+import background from './assests/background.png';
 
 /**
  * Used to fetch Device Information.
@@ -21,7 +21,7 @@ import DeviceInfo from 'react-native-device-info';
 /**
  * Third party module for Country picker.
  */
-import CountryPicker, { getAllCountries } from 'react-native-country-picker-modal'
+import CountryPicker, { getAllCountries } from './Module/src/CountryPicker';
 
 
 export default class App extends Component {
@@ -44,7 +44,7 @@ export default class App extends Component {
       cca2: userLocaleCountryCode,
       callingCode,
       countries: allCountries,
-      currentCountryName: currentName
+      name: currentName
     }
   }
 
@@ -70,7 +70,6 @@ export default class App extends Component {
         <View style={styles.inputView}>
           <Text style={styles.verifyText}>Verify via SMS</Text>
           <View style={styles.countryNameView}>
-            <Text style={styles.text}>{this.state.currentCountryName}</Text>
             <CountryPicker
               countryList={this.state.countries}
               onChange={value => {
@@ -82,9 +81,11 @@ export default class App extends Component {
               closeable
               filterable
               filterPlaceholder=" Search..."
+              currentCountryName={this.state.name}
             />
           </View>
           <View style={styles.underline} />
+
           <View style={styles.numberView}>
             <Text style={styles.text}>+{this.state.callingCode} </Text>
             <TextInput underlineColorAndroid="transparent" style={styles.textInput}></TextInput>
