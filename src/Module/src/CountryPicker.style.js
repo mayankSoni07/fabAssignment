@@ -44,10 +44,12 @@ export default StyleSheet.create({
     backgroundColor: '#2E8B57'
   },
   contentContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: 'white',
+    // flex: 1,
+    // height: 260,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    width: width,
     paddingTop: 10
   },
   header: {
@@ -96,7 +98,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     height: getHeightPercent(7),
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   itemCountryFlag: {
     justifyContent: 'center',
@@ -107,8 +109,8 @@ export default StyleSheet.create({
   itemCountryName: {
     justifyContent: 'center',
     width: '80%',
-    borderBottomWidth: 2 / PixelRatio.get(),
-    borderBottomColor: '#ccc',
+    // borderBottomWidth: 2 / PixelRatio.get(),
+    // borderBottomColor: '#ccc',
     height: 20
   },
   countryName: {

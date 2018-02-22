@@ -151,7 +151,8 @@ export default class CountryPicker extends Component {
       cca2List: countryList,
       dataSource: ds.cloneWithRows(countryList),
       filter: '',
-      letters: this.getLetters(countryList)
+      letters: this.getLetters(countryList),
+      scrollItems: countryList
     }
 
     if (this.props.styles) {
@@ -200,6 +201,7 @@ export default class CountryPicker extends Component {
     this.setState({
       modalVisible: false,
       filter: '',
+      scrollItems: this.state.cca2List,
       dataSource: ds.cloneWithRows(this.state.cca2List)
     })
 
@@ -215,6 +217,7 @@ export default class CountryPicker extends Component {
     this.setState({
       modalVisible: false,
       filter: '',
+      scrollItems: this.state.cca2List,
       dataSource: ds.cloneWithRows(this.state.cca2List)
     })
     if (this.props.onClose) {
@@ -280,11 +283,12 @@ export default class CountryPicker extends Component {
     const filteredCountries =
       value === '' ? this.state.cca2List : this.fuse.search(value)
 
-    this._listView.scrollTo({ y: 0 })
+    // this._listView.scrollTo({ y: 0 })
 
     this.setState({
       filter: value,
-      dataSource: ds.cloneWithRows(filteredCountries)
+      scrollItems: filteredCountries
+      // dataSource: ds.cloneWithRows(filteredCountries)
     })
   }
 
@@ -331,6 +335,7 @@ export default class CountryPicker extends Component {
   }
 
   render() {
+    let self = this;
     return (
       <View>
         <TouchableOpacity
@@ -353,7 +358,7 @@ export default class CountryPicker extends Component {
           transparent={true}
           animationType={this.props.animationType}
           visible={this.state.modalVisible}
-          onRequestClose={() => this.setState({ modalVisible: false })}
+          onRequestClose={() => this.setState({ modalVisible: false, scrollItems: this.state.cca2List, })}
         >
           <View style={styles.modalContainer}>
 
@@ -391,8 +396,13 @@ export default class CountryPicker extends Component {
               </View>
             </View>
             <KeyboardAvoidingView behavior="padding">
-              <View style={styles.contentContainer}>
-                <ListView
+              {/* <View style={styles.contentContainer}> */}
+              <ScrollView contentContainerStyle={styles.contentContainer}>
+                {this.state.scrollItems.map((val, index) => {
+                  return self.renderCountry(val, index)
+                })}
+              </ScrollView>
+              {/* <ListView
                   keyboardShouldPersistTaps="always"
                   enableEmptySections
                   ref={listView => (this._listView = listView)}
@@ -403,8 +413,8 @@ export default class CountryPicker extends Component {
                   onLayout={({ nativeEvent: { layout: { y: offset } } }) =>
                     this.setVisibleListHeight(offset)
                   }
-                />
-                {!this.props.hideAlphabetFilter && (
+                /> */}
+              {/* {!this.props.hideAlphabetFilter && (
                   <ScrollView
                     contentContainerStyle={styles.letters}
                     keyboardShouldPersistTaps="always"
@@ -414,8 +424,8 @@ export default class CountryPicker extends Component {
                         this.renderLetters(letter, index)
                       )}
                   </ScrollView>
-                )}
-              </View>
+                )} */}
+              {/* </View> */}
             </KeyboardAvoidingView>
           </View>
         </Modal>
